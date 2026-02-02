@@ -13,32 +13,21 @@
             --color-basic: #3498db; --color-vip: #e74c3c; --color-premium: #f1c40f; --color-ultimate: #9b59b6;
         }
         body { font-family: 'Montserrat', sans-serif; background: #0f1418; color: white; padding: 20px; margin: 0; }
-        
-        h1, h2, h3 { margin: 0; }
         .container { max-width: 1100px; margin: 0 auto; }
         
-        header { text-align: center; margin-bottom: 40px; padding-top: 20px; }
-        .logo { font-size: 3rem; font-weight: 900; background: linear-gradient(to right, #fff, #bdc3c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
+        /* --- CHÚ THÍCH --- */
+        .notice-bar { background: linear-gradient(90deg, #c0392b, #8e44ad); padding: 15px; border-radius: 10px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 15px; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.2); justify-content: center; }
+        .notice-item { background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 5px; font-weight: bold; }
+
         /* --- GÓI DỊCH VỤ 4 MÀU --- */
         .grid-packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 50px; }
-        .pkg-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 25px 20px; text-align: center; transition: 0.3s; position: relative; overflow: hidden; }
-        .pkg-card:hover { transform: translateY(-10px); }
-        
-        /* Màu riêng cho từng gói */
+        .pkg-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; text-align: center; transition: 0.3s; }
         .pkg-card.basic { border-top: 5px solid var(--color-basic); }
         .pkg-card.vip { border-top: 5px solid var(--color-vip); }
         .pkg-card.premium { border-top: 5px solid var(--color-premium); }
         .pkg-card.ultimate { border-top: 5px solid var(--color-ultimate); }
-
-        .pkg-card.basic .pkg-price { color: var(--color-basic); }
-        .pkg-card.vip .pkg-price { color: var(--color-vip); }
-        .pkg-card.premium .pkg-price { color: var(--color-premium); }
-        .pkg-card.ultimate .pkg-price { color: var(--color-ultimate); }
-
         .pkg-price { font-size: 2.5rem; font-weight: 900; margin: 15px 0; }
-        .btn-buy { width: 100%; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; background: white; color: #333; transition: 0.2s; }
-        .btn-buy:hover { background: #eee; transform: scale(1.05); }
+        .btn-buy { width: 100%; padding: 12px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; background: white; color: #333; }
 
         /* --- PHẦN NHÂN VIÊN --- */
         .staff-section-title { text-align: center; text-transform: uppercase; margin: 50px 0 30px; font-size: 2rem; border-bottom: 2px solid var(--primary); display: inline-block; }
@@ -49,234 +38,171 @@
         .staff-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); margin-bottom: 10px; }
         .staff-name { font-size: 1.2rem; font-weight: 900; color: var(--primary); text-transform: uppercase; }
         .staff-right { flex: 1; padding: 20px; }
-        .staff-bio { font-size: 0.95rem; line-height: 1.6; color: #bdc3c7; }
         .staff-review-area { padding: 20px; background: rgba(0,0,0,0.1); }
         .rating-summary { margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
         .comment-form { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .inp-cmt-name { width: 150px; padding: 10px; border-radius: 5px; border: 1px solid #555; background: #222; color: white; }
-        .inp-cmt-text { flex: 1; padding: 10px; border-radius: 5px; border: 1px solid #555; background: #222; color: white; min-width: 200px; }
+        .inp-cmt-name, .inp-cmt-text { padding: 10px; border-radius: 5px; border: 1px solid #555; background: #222; color: white; }
         .btn-cmt { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .comment-list { margin-top: 15px; max-height: 200px; overflow-y: auto; }
-        .cmt-item { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
-        .cmt-user { font-weight: bold; color: var(--gold); }
-        .cmt-content { color: #ecf0f1; margin-left: 5px; }
-        .star-btn { cursor: pointer; font-size: 1.5rem; color: #555; transition: 0.2s; background: none; border: none; padding: 0 2px; }
+        .star-btn { cursor: pointer; font-size: 1.5rem; color: #555; background: none; border: none; }
         .star-btn.active { color: var(--gold); }
 
-        /* --- LỊCH SỬ ĐƠN HÀNG TOÀN DIỆN --- */
-        .stats-box { margin-top: 50px; background: #161b22; padding: 25px; border-radius: 15px; border: 1px solid #30363d; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .stats-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
-        .stats-table th { background: rgba(255,255,255,0.05); padding: 15px; text-align: left; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
-        .stats-table td { padding: 15px; border-bottom: 1px solid #21262d; }
-        .stats-table tr:hover { background: rgba(255,255,255,0.02); }
-        .badge-pkg { padding: 4px 10px; border-radius: 5px; font-weight: bold; font-size: 0.8rem; }
-        .badge-BASIC { background: var(--color-basic); color: white; }
-        .badge-VIP { background: var(--color-vip); color: white; }
-        .badge-PREMIUM { background: var(--color-premium); color: black; }
-        .badge-ULTIMATE { background: var(--color-ultimate); color: white; }
+        /* --- LỊCH SỬ ĐƠN --- */
+        .stats-box { margin-top: 50px; background: #1e252b; padding: 20px; border-radius: 15px; border: 1px dashed #555; }
+        .stats-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .stats-table th, .stats-table td { padding: 12px; border-bottom: 1px solid #444; text-align: left; }
 
-        /* Modal */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 999; justify-content: center; align-items: center; }
-        .modal-content { background: white; color: #333; width: 90%; max-width: 450px; border-radius: 20px; padding: 30px; }
-        .full-inp { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-
-        @media (max-width: 600px) {
-            .staff-profile { flex-direction: column; }
-            .staff-left { width: 100%; border-right: none; border-bottom: 1px solid #333; }
-        }
+        /* --- MODAL HÓA ĐƠN --- */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999; justify-content: center; align-items: center; }
+        .invoice-card { background: white; color: #333; width: 90%; max-width: 400px; border-radius: 15px; padding: 30px; position: relative; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        .invoice-header { border-bottom: 2px dashed #ccc; text-align: center; padding-bottom: 15px; margin-bottom: 20px; }
+        .gift-box { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; text-align: center; font-weight: 900; margin-top: 15px; border: 1px solid #ffeeba; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1 class="logo">SAYGEX PRO MAX</h1>
-            <p style="color:#7f8c8d">Sự kiện diễn ra vào Thứ 7 hàng tuần</p>
-        </header>
+<div class="container">
+    <header>
+        <h1 class="logo" style="font-size: 3rem; font-weight: 900; text-align: center; color: white;">SAYGEX PRO MAX</h1>
+        <p style="text-align: center; color: #7f8c8d;">TIỆC SAYGEX DIỄN RA VÀO THỨ 7 HÀNG TUẦN</p>
+    </header>
 
-        <div class="grid-packages">
-            <div class="pkg-card basic"><h3>BASIC</h3><div class="pkg-price">199K</div><button class="btn-buy" onclick="openBooking('BASIC', 199)">ĐẶT GÓI</button></div>
-            <div class="pkg-card vip"><h3>VIP</h3><div class="pkg-price">299K</div><button class="btn-buy" onclick="openBooking('VIP', 299)">ĐẶT GÓI</button></div>
-            <div class="pkg-card premium"><h3>PREMIUM</h3><div class="pkg-price">399K</div><button class="btn-buy" onclick="openBooking('PREMIUM', 399)">ĐẶT GÓI</button></div>
-            <div class="pkg-card ultimate"><h3>ULTIMATE</h3><div class="pkg-price">499K</div><button class="btn-buy" onclick="openBooking('ULTIMATE', 499)">ĐẶT GÓI</button></div>
-        </div>
-
-        <div style="text-align: center;"><h2 class="staff-section-title">⭐ ĐỘI NGŨ NHÂN VIÊN ⭐</h2></div>
-        <div class="staff-container" id="staffContainer"></div>
-
-        <div class="stats-box">
-            <h3 style="color:var(--gold); display: flex; align-items: center; gap: 10px;">📊 LỊCH SỬ ĐẶT HÀNG HỆ THỐNG</h3>
-            <table class="stats-table">
-                <thead>
-                    <tr>
-                        <th>Khách hàng</th>
-                        <th>Gói dịch vụ</th>
-                        <th>Tổng tiền</th>
-                        <th>Thời gian</th>
-                    </tr>
-                </thead>
-                <tbody id="statsBody"></tbody>
-            </table>
-            <button onclick="clearHistory()" style="margin-top:20px; color:#e74c3c; background:none; border:none; cursor:pointer; text-decoration:underline; font-size: 0.8rem;">Xóa lịch sử hệ thống</button>
-        </div>
+    <div class="notice-bar">
+        <div class="notice-item">👕 MẶC ÁO THÀNH VIÊN</div>
+        <div class="notice-item">🍖 BUFFET & ĐỒ UỐNG FREE</div>
+        <div class="notice-item">🎁 10% TRÚNG VÉ TIỆC THỨ 7</div>
     </div>
 
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <h2 style="margin-top:0">XÁC NHẬN ĐẶT <span id="mPkgName" style="color:red"></span></h2>
-            <input type="text" id="mName" class="full-inp" placeholder="Tên của bạn...">
-            <div style="display:flex; gap:10px">
-                <input type="date" id="mDate" class="full-inp">
-                <input type="time" id="mTime" class="full-inp">
-            </div>
-            <select id="mStaff" class="full-inp">
-                <option value="0">Chọn nhân viên (Ngẫu nhiên - Free)</option>
-            </select>
-            <button class="btn-buy" style="background:#2d3436; color:white; margin-top:15px; height: 50px;" onclick="confirmBooking()">XÁC NHẬN & COPY</button>
-            <button onclick="document.getElementById('bookingModal').style.display='none'" style="width:100%; border:none; background:none; margin-top:10px; cursor:pointer; color: #666;">Hủy bỏ</button>
-        </div>
+    <div class="grid-packages">
+        <div class="pkg-card basic"><h3>BASIC</h3><div class="pkg-price" style="color:var(--color-basic)">199K</div><button class="btn-buy" onclick="openBooking('BASIC', 199)">ĐẶT GÓI</button></div>
+        <div class="pkg-card vip"><h3>VIP</h3><div class="pkg-price" style="color:var(--color-vip)">299K</div><button class="btn-buy" onclick="openBooking('VIP', 299)">ĐẶT GÓI</button></div>
+        <div class="pkg-card premium"><h3>PREMIUM</h3><div class="pkg-price" style="color:var(--color-premium)">399K</div><button class="btn-buy" onclick="openBooking('PREMIUM', 399)">ĐẶT GÓI</button></div>
+        <div class="pkg-card ultimate"><h3>ULTIMATE</h3><div class="pkg-price" style="color:var(--color-ultimate)">499K</div><button class="btn-buy" onclick="openBooking('ULTIMATE', 499)">ĐẶT GÓI</button></div>
     </div>
 
-    <script>
-        const staffList = [
-            { id: 1, name: "Tuấn", role: "Leader", img: "https://i.pravatar.cc/150?img=11", bio: "Kinh nghiệm 5 năm quản lý. Tận tâm và bao quát." },
-            { id: 2, name: "Đằng", role: "Support", img: "https://i.pravatar.cc/150?img=12", bio: "Năng động, nhiệt tình, chuẩn bị hậu cần tốt." },
-            { id: 3, name: "Khang", role: "MC", img: "https://i.pravatar.cc/150?img=33", bio: "Hoạt ngôn, chuyên khuấy động phong trào." },
-            { id: 4, name: "Kiên", role: "Logistics", img: "https://i.pravatar.cc/150?img=59", bio: "Cẩn thận, tỉ mỉ, chu đáo." },
-            { id: 5, name: "Huy", role: "Staff", img: "https://i.pravatar.cc/150?img=68", bio: "Thân thiện, lễ phép, hỗ trợ chu đáo." },
-            { id: 6, name: "Minh", role: "Staff", img: "https://i.pravatar.cc/150?img=13", bio: "Nhanh nhẹn, sức khỏe tốt." },
-            { id: 7, name: "Long", role: "Staff", img: "https://i.pravatar.cc/150?img=51", bio: "Nhiệt huyết, luôn lắng nghe khách hàng." }
-        ];
+    <div style="text-align: center;"><h2 class="staff-section-title">⭐ ĐỘI NGŨ SAYGEX ⭐</h2></div>
+    <div class="staff-container" id="staffContainer"></div>
 
-        const STAFF_KEY = 'saygex_staff_data_v2';
-        const ORDER_KEY = 'saygex_orders_v2';
+    <div class="stats-box">
+        <h3 style="color:var(--gold)">📊 LỊCH SỬ ĐẶT HÀNG HỆ THỐNG</h3>
+        <table class="stats-table">
+            <thead><tr><th>Tên</th><th>Gói</th><th>Tổng</th><th>Thời gian</th></tr></thead>
+            <tbody id="statsBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="bookingModal" class="modal">
+    <div class="invoice-card">
+        <div class="invoice-header">
+            <h2 style="margin:0">SAYGEX INVOICE</h2>
+            <small id="invId">#INV-0000</small>
+        </div>
+        <p><strong>Khách hàng:</strong> <span id="invUser"></span></p>
+        <p><strong>Gói dịch vụ:</strong> <span id="invPkg"></span></p>
+        <p><strong>Ngày giờ:</strong> <span id="invTime"></span></p>
+        <h3 style="border-top: 1px solid #eee; padding-top: 10px;">TỔNG: <span id="invTotal" style="color:red"></span></h3>
         
-        let staffData = JSON.parse(localStorage.getItem(STAFF_KEY)) || {};
-        let orderHistory = JSON.parse(localStorage.getItem(ORDER_KEY)) || [];
+        <div id="giftBox" class="gift-box" style="display:none">🎁 CHÚC MỪNG! BẠN TRÚNG VÉ TIỆC THỨ 7!</div>
 
+        <button class="btn-buy" style="background:#2ecc71; color:white; margin-top:20px" onclick="confirmBooking()">XÁC NHẬN & COPY</button>
+        <button class="btn-buy" style="background:none; color:#999" onclick="document.getElementById('bookingModal').style.display='none'">Hủy đơn</button>
+    </div>
+</div>
+
+<script>
+    const staffList = [
+        { id: 1, name: "Tuấn", role: "nhân viên", img: "https://thanhnien.mediacdn.vn/uploaded/phanthuong/2020_05_06/71_FQIO.jpg?width=500", bio: "12cm, nhiệt tình, sung sức. là một trong những ông bố đơn thân được book nhiều nhất" },
+        { id: 2, name: "Đằng", role: "nhân viên", img: "sandbox:/mnt/data/xau_gia_400x400.png", bio: "20cm, hăng, mạnh, máy dập. ông bố đơn thân tuyệt vời nhất của dịch vụ" },
+        { id: 3, name: "Khôn làng", role: "nhân viên", img: "https://i.pravatar.cc/400?img=50", bio: "8cm, Hoạt ngôn, vui tính, chuyên khuấy động phong trào các buổi tiệc." },
+        { id: 4, name: "Kiên", role: "chủ", img: "https://www.housing.org.uk/globalassets/images/blogauthors/sam-higgins.png?width=400&mode=crop&heightratio=1", bio: "đã cắt, phục vụ tận tâm, chủ tiệc, thân thiện, nhanh nhẹn" },
+        { id: 5, name: "Hốn lòi ", role: "rửa đít thuê", img: "https://ibb.co/xKYpnvDW", bio: "36cm, cực to, cực điên, làm theo yêu cầu" },
+        { id: 6, name: "ông nội", role: "nhân viên", img: "https://pbs.twimg.com/profile_images/1219094562838204416/IeapBwFN_400x400.jpg", bio: "16cm, lính hải quân, sức khỏe tốt, ông bố già ." },
+        { id: 7, name: "hùng hói", role: "rửa chân thuê", img: "https://pbs.twimg.com/profile_images/1800529032242409472/1sLQzmCT.jpg", bio: "1cm, Mới gia nhập nhưng rất nhiệt huyết, luôn lắng nghe ý kiến khách hàng." }
+    ];
+
+    let staffData = JSON.parse(localStorage.getItem('saygex_staff_v3')) || {};
+    let orderHistory = JSON.parse(localStorage.getItem('saygex_orders_v3')) || [];
+    let currentTempOrder = {};
+
+    function renderStaff() {
+        const container = document.getElementById('staffContainer');
+        container.innerHTML = "";
         staffList.forEach(s => {
-            if (!staffData[s.id]) {
-                staffData[s.id] = { totalStars: 0, reviews: 0, comments: [] };
-            }
+            if (!staffData[s.id]) staffData[s.id] = { totalStars: 0, reviews: 0, comments: [] };
+            const d = staffData[s.id];
+            const avg = d.reviews === 0 ? 5.0 : (d.totalStars / d.reviews).toFixed(1);
+            const card = document.createElement('div');
+            card.className = 'staff-card';
+            card.innerHTML = `
+                <div class="staff-profile">
+                    <div class="staff-left"><img src="${s.img}" class="staff-avatar"><div class="staff-name">${s.name}</div></div>
+                    <div class="staff-right"><h3>GIỚI THIỆU</h3><p>${s.bio}</p></div>
+                </div>
+                <div class="staff-review-area">
+                    <div class="rating-summary">
+                        <span>⭐ ${avg}/5 (${d.reviews} lượt)</span>
+                        <div>${[1,2,3,4,5].map(i => `<button class="star-btn" onclick="rate(${s.id},${i})">★</button>`).join('')}</div>
+                    </div>
+                    <div id="cmts-${s.id}">${d.comments.map(c => `<div><b>${c.u}:</b> ${c.t}</div>`).join('')}</div>
+                    <div class="comment-form">
+                        <input type="text" id="un-${s.id}" class="inp-cmt-name" placeholder="Tên...">
+                        <input type="text" id="ut-${s.id}" class="inp-cmt-text" placeholder="Nhận xét...">
+                        <button class="btn-cmt" onclick="addCmt(${s.id})">Gửi</button>
+                    </div>
+                </div>`;
+            container.appendChild(card);
         });
+    }
 
-        function renderStaff() {
-            const container = document.getElementById('staffContainer');
-            container.innerHTML = "";
-            staffList.forEach(s => {
-                const data = staffData[s.id];
-                const avg = data.reviews === 0 ? 5 : (data.totalStars / data.reviews).toFixed(1);
-                const card = document.createElement('div');
-                card.className = 'staff-card';
-                card.innerHTML = `
-                    <div class="staff-profile">
-                        <div class="staff-left">
-                            <img src="${s.img}" class="staff-avatar">
-                            <div class="staff-name">${s.name}</div>
-                            <div style="font-size:0.8rem; color:#777">(${s.role})</div>
-                        </div>
-                        <div class="staff-right">
-                            <h3 style="color:var(--gold)">GIỚI THIỆU</h3>
-                            <p class="staff-bio">${s.bio}</p>
-                        </div>
-                    </div>
-                    <div class="staff-review-area">
-                        <div class="rating-summary">
-                            <div>
-                                <span style="font-size:1.5rem; font-weight:900; color:var(--gold)">${avg}/5</span> 
-                                <span style="color:#aaa; font-size:0.9rem">(${data.reviews} lượt)</span>
-                            </div>
-                            <div>
-                                Đánh giá: ${[1,2,3,4,5].map(i => `<button class="star-btn" onclick="rateStaff(${s.id}, ${i})">★</button>`).join('')}
-                            </div>
-                        </div>
-                        <div class="comment-list">
-                            ${data.comments.length === 0 ? '<div style="color:#555; font-style:italic">Chưa có bình luận...</div>' : 
-                              data.comments.map(c => `<div class="cmt-item"><span class="cmt-user">${c.user}:</span> <span class="cmt-content">${c.text}</span></div>`).join('')}
-                        </div>
-                        <div class="comment-form">
-                            <input type="text" id="name-${s.id}" class="inp-cmt-name" placeholder="Tên...">
-                            <input type="text" id="text-${s.id}" class="inp-cmt-text" placeholder="Nhận xét...">
-                            <button class="btn-cmt" onclick="addComment(${s.id})">Gửi</button>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
+    function rate(id, s) { 
+        staffData[id].totalStars += s; staffData[id].reviews += 1; 
+        localStorage.setItem('saygex_staff_v3', JSON.stringify(staffData)); renderStaff(); 
+    }
 
-        function rateStaff(id, stars) {
-            staffData[id].totalStars += stars;
-            staffData[id].reviews += 1;
-            localStorage.setItem(STAFF_KEY, JSON.stringify(staffData));
-            renderStaff();
-            confetti({ particleCount: 50, spread: 50, origin: { y: 0.7 } });
-        }
+    function addCmt(id) {
+        const u = document.getElementById(`un-${id}`).value || "Khách";
+        const t = document.getElementById(`ut-${id}`).value;
+        if(!t) return;
+        staffData[id].comments.unshift({u, t});
+        localStorage.setItem('saygex_staff_v3', JSON.stringify(staffData)); renderStaff();
+    }
 
-        function addComment(id) {
-            const name = document.getElementById(`name-${id}`).value || "Ẩn danh";
-            const text = document.getElementById(`text-${id}`).value;
-            if (!text) return alert("Vui lòng nhập nội dung!");
-            staffData[id].comments.unshift({ user: name, text: text });
-            localStorage.setItem(STAFF_KEY, JSON.stringify(staffData));
-            renderStaff();
-        }
+    function openBooking(pkg, p) {
+        const name = prompt("Tên của bạn:");
+        if(!name) return;
+        const isWin = Math.random() < 0.1;
+        const time = new Date().toLocaleString();
+        const id = "INV-" + Math.floor(1000 + Math.random() * 9000);
+        
+        currentTempOrder = { name, pkg, p, time, id, isWin };
+        
+        document.getElementById('invId').innerText = "#" + id;
+        document.getElementById('invUser').innerText = name;
+        document.getElementById('invPkg').innerText = pkg;
+        document.getElementById('invTime').innerText = time;
+        document.getElementById('invTotal').innerText = p + "K";
+        document.getElementById('giftBox').style.display = isWin ? 'block' : 'none';
+        document.getElementById('bookingModal').style.display = 'flex';
+    }
 
-        let currentPkg = "", currentPrice = 0;
-        function openBooking(pkg, price) {
-            currentPkg = pkg; currentPrice = price;
-            document.getElementById('mPkgName').innerText = pkg;
-            const select = document.getElementById('mStaff');
-            select.innerHTML = '<option value="0">Ngẫu nhiên (Free)</option>';
-            staffList.forEach(s => select.innerHTML += `<option value="50">${s.name} (+50k)</option>`);
-            document.getElementById('bookingModal').style.display = 'flex';
-        }
+    function confirmBooking() {
+        orderHistory.unshift(currentTempOrder);
+        localStorage.setItem('saygex_orders_v3', JSON.stringify(orderHistory));
+        const txt = `🧾 HOÁ ĐƠN SAYGEX\n- Khách: ${currentTempOrder.name}\n- Gói: ${currentTempOrder.pkg}\n- Tổng: ${currentTempOrder.p}K\n${currentTempOrder.isWin ? '🎁 TRÚNG VÉ TIỆC THỨ 7' : ''}`;
+        navigator.clipboard.writeText(txt);
+        confetti({particleCount: 150});
+        alert("Đã lưu & Copy hoá đơn!");
+        window.open("https://www.facebook.com/nguyen.duc.kien.30082", "_blank");
+        location.reload();
+    }
 
-        function confirmBooking() {
-            const name = document.getElementById('mName').value;
-            const date = document.getElementById('mDate').value;
-            const time = document.getElementById('mTime').value;
-            const staffFee = parseInt(document.getElementById('mStaff').value);
-            if(!name || !date || !time) return alert("Vui lòng điền đủ thông tin!");
+    function renderHistory() {
+        document.getElementById('statsBody').innerHTML = orderHistory.map(o => `
+            <tr><td>${o.name}</td><td>${o.pkg}</td><td style="color:var(--gold)">${o.p}K</td><td>${o.time}</td></tr>
+        `).join('');
+    }
 
-            let total = currentPrice + staffFee;
-            if (new Date(date).getDay() === 6) total = total * 0.9; // Giảm giá 10% cho thứ 7 (Ví dụ)
-
-            const order = { name, pkg: currentPkg, total: total + "K", time: time + " " + date };
-            orderHistory.push(order);
-            localStorage.setItem(ORDER_KEY, JSON.stringify(orderHistory));
-            renderHistory();
-
-            const msg = `📢 ĐƠN SAYGEX:\n- Khách: ${name}\n- Gói: ${currentPkg}\n- Tổng: ${total}K\n- Hẹn: ${time} ${date}`;
-            navigator.clipboard.writeText(msg).then(() => {
-                alert("Đã lưu đơn & Copy nội dung!");
-                window.open("https://www.facebook.com/nguyen.duc.kien.30082", "_blank");
-            });
-            document.getElementById('bookingModal').style.display = 'none';
-        }
-
-        function renderHistory() {
-            const tbody = document.getElementById('statsBody');
-            if(orderHistory.length === 0) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#555; padding: 30px;">Chưa có dữ liệu đơn hàng...</td></tr>'; return; }
-            tbody.innerHTML = orderHistory.slice().reverse().map(o => `
-                <tr>
-                    <td style="font-weight:bold; color: white;">${o.name}</td>
-                    <td><span class="badge-pkg badge-${o.pkg}">${o.pkg}</span></td>
-                    <td style="color:var(--gold); font-weight:bold">${o.total}</td>
-                    <td style="color:#8b949e; font-size:0.85rem">${o.time}</td>
-                </tr>
-            `).join('');
-        }
-
-        function clearHistory() {
-            if(confirm("Xóa sạch lịch sử đơn hàng?")) {
-                localStorage.removeItem(ORDER_KEY);
-                orderHistory = [];
-                renderHistory();
-            }
-        }
-
-        window.onload = function() { renderStaff(); renderHistory(); };
-    </script>
+    window.onload = () => { renderStaff(); renderHistory(); };
+</script>
 </body>
 </html>
