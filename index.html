@@ -114,14 +114,15 @@
 
 <script>
     const staffList = [
-        { id: 1, name: "Tuấn khỉ", role: "nhân viên", img: "https://thanhnien.mediacdn.vn/uploaded/phanthuong/2020_05_06/71_FQIO.jpg?width=500", bio: "12cm, nhiệt tình, sung sức. là một trong những ông bố đơn thân được book nhiều nhất" },
-        { id: 2, name: "Đằng", role: "nhân viên ưu tú", img: "sandbox:/mnt/data/xau_gia_400x400.png", bio: "20cm, hăng, mạnh, máy dập. ông bố đơn thân tuyệt vời nhất của dịch vụ" },
-        { id: 3, name: "Khôn làng", role: "nhân viên", img: "https://i.pravatar.cc/400?img=50", bio: "8cm, Hoạt ngôn, vui tính, chuyên khuấy động phong trào các buổi tiệc." },
-        { id: 4, name: "Kiên", role: "chủ", img: "https://www.housing.org.uk/globalassets/images/blogauthors/sam-higgins.png?width=400&mode=crop&heightratio=1", bio: "đã cắt, phục vụ tận tâm, chủ tiệc, thân thiện, nhanh nhẹn" },
-        { id: 5, name: "Hốn lòi", role: "rửa đít thuê", img: "https://ibb.co/xKYpnvDW", bio: "36cm, cực to, cực điên, làm theo yêu cầu" },
-        { id: 6, name: "ông nội", role: "nhân viên", img: "https://pbs.twimg.com/profile_images/1219094562838204416/IeapBwFN_400x400.jpg", bio: "16cm, lính hải quân, sức khỏe tốt, ông bố già ." },
-        { id: 7, name: "hùng hói", role: "nhân viên", img: "https://pbs.twimg.com/profile_images/1800529032242409472/1sLQzmCT.jpg", bio: "1cm, Mới gia nhập nhưng rất nhiệt huyết, luôn lắng nghe ý kiến khách hàng." }
+        { name: "Tuấn khỉ", role: "nhân viên", img: "https://thanhnien.mediacdn.vn/uploaded/phanthuong/2020_05_06/71_FQIO.jpg?width=500", bio: "12cm, nhiệt tình, sung sức. là một trong những ông bố đơn thân được book nhiều nhất" },
+        { name: "Đằng", role: "nhân viên ưu tú", img: "sandbox:/mnt/data/xau_gia_400x400.png", bio: "20cm, hăng, mạnh, máy dập. ông bố đơn thân tuyệt vời nhất của dịch vụ" },
+        { name: "Khôn làng", role: "nhân viên", img: "https://i.pravatar.cc/400?img=50", bio: "8cm, Hoạt ngôn, vui tính, chuyên khuấy động phong trào các buổi tiệc." },
+        { name: "Kiên", role: "chủ", img: "https://www.housing.org.uk/globalassets/images/blogauthors/sam-higgins.png?width=400&mode=crop&heightratio=1", bio: "đã cắt, phục vụ tận tâm, chủ tiệc, thân thiện, nhanh nhẹn" },
+        { name: "Hốn lòi", role: "rửa đít thuê", img: "https://ibb.co/xKYpnvDW", bio: "36cm, cực to, cực điên, làm theo yêu cầu" },
+        { name: "ông nội", role: "nhân viên", img: "https://pbs.twimg.com/profile_images/1219094562838204416/IeapBwFN_400x400.jpg", bio: "16cm, lính hải quân, sức khỏe tốt, ông bố già ." },
+        { name: "hùng hói", role: "nhân viên", img: "https://pbs.twimg.com/profile_images/1800529032242409472/1sLQzmCT.jpg", bio: "1cm, Mới gia nhập nhưng rất nhiệt huyết, luôn lắng nghe ý kiến khách hàng." }
     ];
+
 
     let currentOrder = {};
     const STORAGE_ORDER = 'saygex_global_orders';
