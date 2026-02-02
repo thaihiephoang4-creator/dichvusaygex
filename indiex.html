@@ -3,187 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAYGEX BOOKING</title>
+    <title>DỊCH VỤ SAYGEX PRO MAX</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        /* CSS GIAO DIỆN */
-        :root { --primary: #ff4757; --gold: #ffa502; --dark: #2f3542; --glass: rgba(255, 255, 255, 0.1); }
-        body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; color: white; background: #1e272e; padding-bottom: 80px; }
-        
-        /* HEADER */
-        header { text-align: center; margin-bottom: 30px; }
-        .logo { font-size: 2.5rem; font-weight: 900; color: #dfe4ea; text-transform: uppercase; margin: 0; }
-        .sub-logo { color: var(--gold); letter-spacing: 2px; font-size: 0.9rem; }
+        /* GIỮ NGUYÊN CSS CŨ CỦA BẠN */
+        :root { --primary: #ff4757; --gold: #ffa502; --dark: #2f3542; --glass: rgba(255, 255, 255, 0.08); --border: rgba(255, 255, 255, 0.2); }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; color: white; background: linear-gradient(-45deg, #1e272e, #2c3e50, #000000, #130f40); background-size: 400% 400%; animation: gradientBG 15s ease infinite; padding-bottom: 100px; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* DANH SÁCH GÓI */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
-        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; text-align: center; overflow: hidden; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .card-name { padding: 15px; font-size: 1.5rem; font-weight: 900; background: rgba(255,255,255,0.05); }
-        .card-price { padding: 20px; font-size: 2.5rem; font-weight: 900; color: var(--gold); }
-        .btn-buy { padding: 10px 25px; margin-bottom: 20px; border-radius: 20px; border: none; font-weight: bold; cursor: pointer; background: white; color: #333; transition: 0.2s; }
-        .btn-buy:hover { background: var(--gold); color: white; }
+        header { text-align: center; margin-bottom: 50px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .logo { font-size: 3.8rem; font-weight: 900; letter-spacing: 3px; margin: 0; text-transform: uppercase; background: -webkit-linear-gradient(white, #dfe4ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* BẢNG HÓA ĐƠN VỪA ĐẶT (Thay cho thống kê) */
-        .invoice-section { max-width: 1000px; margin: 40px auto; background: #2d3436; padding: 20px; border-radius: 15px; border: 1px dashed #7f8c8d; }
-        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-        .invoice-table th, .invoice-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; overflow: hidden; backdrop-filter: blur(15px); transition: 0.4s; text-align: center; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .card-name { padding: 25px; font-size: 2rem; font-weight: 900; text-transform: uppercase; color: white; }
+        .card-price { padding: 20px 0 30px; font-size: 3.5rem; font-weight: 900; }
         
-        /* MODAL (Cửa sổ bật lên) */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; }
-        .modal-content { background: white; color: #333; width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; position: relative; animation: zoomIn 0.3s; }
-        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        .basic .card-name { background: linear-gradient(90deg, #ff4757, #ff6b81); }
+        .vip .card-name { background: linear-gradient(90deg, #ffa502, #eccc68); }
+        .premium .card-name { background: linear-gradient(90deg, #3742fa, #1e90ff); }
+        .ultimate .card-name { background: linear-gradient(90deg, #5352ed, #a29bfe); }
+
+        .btn-buy { width: 80%; padding: 18px; margin-bottom: 30px; border-radius: 50px; border: none; font-weight: 900; cursor: pointer; background: white; color: var(--dark); font-size: 1.1rem; transition: 0.3s; }
+        .btn-buy:hover { transform: scale(1.05); }
+
+        .party-box { max-width: 1200px; margin: 40px auto; background: #d63031; border-radius: 20px; padding: 30px; position: relative; border: 1px solid rgba(255,255,255,0.2); }
+        .party-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .party-item { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; font-size: 0.95rem; }
+
+        /* KHU VỰC THỐNG KÊ (Đã tối ưu hiển thị) */
+        .admin-section { max-width: 1200px; margin: 40px auto; background: rgba(0,0,0,0.5); padding: 25px; border-radius: 20px; border: 1px solid var(--border); }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; color: white; font-size: 0.9rem; }
+        .admin-table th, .admin-table td { padding: 12px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .admin-table th { background: rgba(255,255,255,0.2); }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; color: #2d3436; width: 90%; max-width: 500px; border-radius: 25px; padding: 30px; position: relative; animation: popUp 0.3s ease; }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 10px; box-sizing: border-box; }
+        .time-guide { background: #e3f2fd; color: #0d47a1; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-size: 0.9rem; }
         
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        .btn-confirm { width: 100%; padding: 15px; background: #2f3542; color: white; border: none; border-radius: 8px; font-weight: 900; cursor: pointer; margin-top: 15px; font-size: 1.1rem; }
-        
-        /* Popup Copy Thủ Công (Dự phòng cho Google Sites) */
-        .manual-copy-box { display: none; margin-top: 15px; background: #fff3cd; padding: 10px; border-radius: 8px; border: 1px solid #ffeeba; }
-        textarea.copy-area { width: 100%; height: 80px; padding: 5px; font-size: 0.9rem; border: 1px solid #ddd; }
+        .btn-confirm { width: 100%; padding: 15px; background: #2d3436; color: white; border: none; border-radius: 10px; font-weight: 900; cursor: pointer; margin-top: 15px; font-size: 1.1rem; }
+        .btn-confirm:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
 
     <header>
         <h1 class="logo">DỊCH VỤ SAYGEX</h1>
-        <div class="sub-logo">PRO MAX EDITION</div>
+        <div style="color: #bdc3c7; font-weight: 600; letter-spacing: 2px;">PRO MAX EDITION</div>
     </header>
 
     <div class="grid-container">
-        <div class="card"><div class="card-name">BASIC</div><div class="card-price">199K</div><button class="btn-buy" onclick="openForm('BASIC', 199)">CHỌN</button></div>
-        <div class="card"><div class="card-name">VIP</div><div class="card-price">299K</div><button class="btn-buy" onclick="openForm('VIP', 299)">CHỌN</button></div>
-        <div class="card"><div class="card-name">PREMIUM</div><div class="card-price">399K</div><button class="btn-buy" onclick="openForm('PREMIUM', 399)">CHỌN</button></div>
-        <div class="card"><div class="card-name">ULTIMATE</div><div class="card-price">499K</div><button class="btn-buy" onclick="openForm('ULTIMATE', 499)">CHỌN</button></div>
+        <div class="card basic"><div class="card-name">BASIC</div><div class="card-price">199K</div><button class="btn-buy" onclick="openBooking('BASIC', 199)">CHỌN GÓI</button></div>
+        <div class="card vip"><div class="card-name">VIP</div><div class="card-price">299K</div><button class="btn-buy" onclick="openBooking('VIP', 299)">CHỌN GÓI</button></div>
+        <div class="card premium"><div class="card-name">PREMIUM</div><div class="card-price">399K</div><button class="btn-buy" onclick="openBooking('PREMIUM', 399)">CHỌN GÓI</button></div>
+        <div class="card ultimate"><div class="card-name">ULTIMATE</div><div class="card-price">499K</div><button class="btn-buy" onclick="openBooking('ULTIMATE', 499)">CHỌN GÓI</button></div>
     </div>
 
-    <div class="invoice-section">
-        <h3 style="margin:0; color: var(--gold)">🧾 ĐƠN VỪA TẠO (Chờ gửi đi)</h3>
-        <p style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">*Lưu ý: Đơn hàng sẽ biến mất khi tải lại trang. Hãy gửi ngay cho Admin!</p>
-        <table class="invoice-table">
-            <thead>
-                <tr style="color: #bdc3c7;"><th>Khách hàng</th><th>Gói</th><th>Tổng</th><th>Trạng thái</th></tr>
-            </thead>
-            <tbody id="invoiceBody">
-                <tr><td colspan="4" style="text-align:center; padding: 20px;">Chưa có đơn hàng nào...</td></tr>
-            </tbody>
-        </table>
+    <div class="party-box">
+        <h2 style="margin:0; text-transform:uppercase; text-align:center">✨ Tiệc Saygex Đẳng Cấp</h2>
+        <div class="party-grid">
+            <div class="party-item">🧥 <b>BẮT BUỘC:</b> Mặc áo thành viên.</div>
+            <div class="party-item">🍗 <b>FREE:</b> Buffet & Đồ uống.</div>
+            <div class="party-item">⚔️ <b>GAME:</b> Minigame có thưởng.</div>
+            <div class="party-item">🎁 <b>SALE:</b> Giảm 50% Thứ 7.</div>
+        </div>
+    </div>
+
+    <div class="admin-section">
+        <h3 style="margin:0; border-bottom:1px solid rgba(255,255,255,0.3); padding-bottom:10px">
+            📊 LỊCH SỬ ĐẶT ĐƠN (Lưu trên máy này)
+        </h3>
+        <div style="overflow-x:auto; max-height: 300px; overflow-y: auto;">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Tên Khách</th>
+                        <th>Gói Dịch Vụ</th>
+                        <th>Thời Gian Hẹn</th>
+                        <th>Tổng Tiền</th>
+                        <th>Ngày Đặt</th>
+                    </tr>
+                </thead>
+                <tbody id="statsBody">
+                    <tr><td colspan="5" style="text-align:center">Chưa có dữ liệu...</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <button onclick="clearHistory()" style="margin-top:15px; background:#e74c3c; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer; font-weight:bold">XÓA LỊCH SỬ</button>
     </div>
 
     <div id="bookingModal" class="modal">
         <div class="modal-content">
-            <button onclick="closeModal()" style="position:absolute; top:10px; right:15px; border:none; background:none; font-size:24px; cursor:pointer">&times;</button>
+            <span onclick="closeModal()" style="position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; color:#7f8c8d">&times;</span>
             
             <div id="step1">
-                <h2 style="margin-top:0; text-align:center">ĐẶT GÓI <span id="pkgName" style="color:red"></span></h2>
-                <label>Tên của bạn:</label>
-                <input type="text" id="inpName" placeholder="Ví dụ: Nguyễn Văn A">
-                <label>Thời gian hẹn:</label>
+                <h2 style="margin-top:0">ĐẶT GÓI <span id="pkgName" style="color:#d63031"></span></h2>
+                <div class="time-guide">⏰ Hoạt động: 08:00 - 23:00 hàng ngày.</div>
+                
+                <input type="text" id="inpName" placeholder="Nhập tên của bạn..." required>
                 <div style="display:flex; gap:10px">
-                    <input type="time" id="inpTime">
                     <input type="date" id="inpDate">
+                    <input type="time" id="inpTime">
                 </div>
-                <label>Chọn nhân viên:</label>
+                
+                <label style="font-weight:bold; display:block; margin-top:10px">Chọn nhân viên:</label>
                 <select id="inpStaff">
                     <option value="100">Đằng (+100k)</option>
                     <option value="75">Khang (+75k)</option>
                     <option value="50">Kiên (+50k)</option>
-                    <option value="0" selected>Tuấn (Free)</option>
+                    <option value="0" selected>Tuấn (+0k)</option>
                 </select>
-                <button class="btn-confirm" onclick="calcTotal()">XEM HÓA ĐƠN</button>
+
+                <button class="btn-confirm" onclick="calcInvoice()">TIẾP TỤC ➝</button>
             </div>
 
             <div id="step2" style="display:none">
-                <h2 style="text-align:center; margin-top:0">XÁC NHẬN</h2>
-                <div id="billDetails" style="background:#f1f2f6; padding:15px; border-radius:10px; font-size:0.95rem;"></div>
-                
-                <div class="manual-copy-box" id="manualCopyBox">
-                    <span style="color:#d63031; font-weight:bold; font-size:0.8rem">⚠️ Google Sites chặn copy tự động. Hãy copy đoạn dưới đây:</span>
-                    <textarea class="copy-area" id="finalText" readonly></textarea>
-                </div>
-
-                <button class="btn-confirm" onclick="finishOrder()">✅ ĐÃ COPY -> GỬI FACEBOOK</button>
-                <button onclick="backToStep1()" style="width:100%; border:none; background:none; padding:10px; cursor:pointer; text-decoration:underline">Sửa lại</button>
+                <h2 style="margin-top:0; text-align:center">HÓA ĐƠN</h2>
+                <div style="background:#f8f9fa; padding:15px; border-radius:15px; border:1px dashed #bdc3c7" id="invoiceDetails">
+                    </div>
+                <button class="btn-confirm" onclick="processOrder()">XÁC NHẬN & COPY ✅</button>
+                <button onclick="backToStep1()" style="width:100%; border:none; background:none; padding:10px; cursor:pointer; color:#7f8c8d; text-decoration:underline">Quay lại sửa</button>
             </div>
         </div>
     </div>
 
     <script>
-        let curPkg = "", curPrice = 0;
-        
-        function openForm(name, price) {
-            curPkg = name; curPrice = price;
+        // --- 1. KHỞI TẠO DỮ LIỆU ---
+        // Sử dụng một tên khóa (Key) duy nhất để tránh trùng lặp
+        const STORAGE_KEY = 'saygex_history_v2'; 
+        let currentPkg = "", basePrice = 0;
+        let orderHistory = [];
+
+        // Hàm nạp dữ liệu ngay khi chạy web
+        function initApp() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    orderHistory = JSON.parse(data);
+                }
+            } catch (e) {
+                console.error("Lỗi đọc dữ liệu:", e);
+                orderHistory = [];
+            }
+            renderStats(); // Vẽ bảng ngay lập tức
+        }
+
+        // --- 2. CÁC HÀM XỬ LÝ GIAO DIỆN ---
+        function openBooking(name, price) {
+            currentPkg = name; 
+            basePrice = price;
             document.getElementById('pkgName').innerText = name;
-            document.getElementById('step1').style.display = 'block';
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('manualCopyBox').style.display = 'none';
+            backToStep1(); // Reset về bước 1
             document.getElementById('bookingModal').style.display = 'flex';
         }
 
-        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
-        function backToStep1() { document.getElementById('step1').style.display = 'block'; document.getElementById('step2').style.display = 'none'; }
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
 
-        function calcTotal() {
-            const name = document.getElementById('inpName').value;
+        function backToStep1() {
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+        }
+
+        function calcInvoice() {
+            const name = document.getElementById('inpName').value.trim();
             const date = document.getElementById('inpDate').value;
             const time = document.getElementById('inpTime').value;
             const staffOpt = document.getElementById('inpStaff');
             const staffFee = parseInt(staffOpt.value);
             const staffName = staffOpt.options[staffOpt.selectedIndex].text;
 
-            if(!name || !date || !time) { alert("Vui lòng điền đủ thông tin!"); return; }
+            if (!name || !date || !time) {
+                alert("Vui lòng nhập đầy đủ Tên, Ngày và Giờ!");
+                return;
+            }
 
-            let total = curPrice + staffFee;
+            // Tính tiền & Ưu đãi
+            let total = basePrice + staffFee;
             let note = "";
-            if(new Date(date).getDay() === 6) { total *= 0.5; note = " (Đã giảm 50% T7)"; }
+            const dayOfWeek = new Date(date).getDay();
+            if (dayOfWeek === 6) { // Thứ 7
+                total = total * 0.5;
+                note = `<p style="color:red; font-weight:bold">🎉 Giảm 50% (Thứ 7)</p>`;
+            }
 
-            // Tạo nội dung tin nhắn
-            const msg = `📢 ĐƠN MỚI TỪ WEB:\n- Khách: ${name}\n- Gói: ${curPkg}\n- NV: ${staffName}\n- Hẹn: ${time} ngày ${date}\n- Tổng: ${total}K${note}`;
-
-            // Hiển thị hóa đơn
-            document.getElementById('billDetails').innerHTML = `
-                <b>${name}</b><br>Gói: ${curPkg} - NV: ${staffName}<br>
-                Thời gian: ${time} ${date}<br>
-                <b style="color:red; font-size:1.2rem">TỔNG: ${total}K</b>${note}
+            // Hiển thị hóa đơn tạm
+            document.getElementById('invoiceDetails').innerHTML = `
+                <p><b>Khách:</b> ${name}</p>
+                <p><b>Gói:</b> ${currentPkg} (${basePrice}k)</p>
+                <p><b>Nhân viên:</b> ${staffName}</p>
+                <p><b>Thời gian:</b> ${time} - ${date}</p>
+                ${note}
+                <hr>
+                <h3 style="color:#d63031; text-align:center; margin-bottom:0">TỔNG: ${total}K</h3>
             `;
-            
-            // Chuẩn bị text để copy
-            document.getElementById('finalText').value = msg;
-            
-            // Thử copy tự động
-            navigator.clipboard.writeText(msg).then(() => {
-                alert("Đã copy nội dung! Ấn nút để qua Facebook.");
-            }).catch(() => {
-                // Nếu Google Sites chặn, hiện hộp thủ công
-                document.getElementById('manualCopyBox').style.display = 'block';
-                document.getElementById('finalText').select();
-            });
+
+            // Lưu tạm biến toàn cục để bước sau dùng
+            window.tempOrderData = {
+                name: name,
+                pkg: currentPkg,
+                time: time + " " + date,
+                total: total + "K",
+                staff: staffName,
+                timestamp: new Date().toLocaleString()
+            };
 
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
-            
-            // Lưu dữ liệu tạm để hiển thị bên ngoài (sẽ mất khi reload)
-            window.tempOrder = { name, pkg: curPkg, total: total + "K" };
         }
 
-        function finishOrder() {
-            // Thêm vào bảng "Đơn vừa tạo"
-            const tbody = document.getElementById('invoiceBody');
-            if(tbody.innerHTML.includes("Chưa có")) tbody.innerHTML = "";
+        // --- 3. XỬ LÝ "LƯU DỮ LIỆU" VÀ "COPY" ---
+        function processOrder() {
+            const order = window.tempOrderData;
             
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${window.tempOrder.name}</td><td>${window.tempOrder.pkg}</td><td>${window.tempOrder.total}</td><td style="color:#2ecc71">Đang gửi...</td>`;
-            tbody.prepend(tr);
+            // A. LƯU VÀO LOCAL STORAGE (Không bị mất khi reload)
+            orderHistory.push(order);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(orderHistory));
+            
+            // B. CẬP NHẬT BẢNG NGAY
+            renderStats();
 
-            // Hiệu ứng
-            confetti({ particleCount: 150, spread: 70 });
+            // C. THỰC HIỆN COPY (Phương pháp "Textarea ảo" mạnh nhất)
+            const textToCopy = `🔔 ĐƠN HÀNG SAYGEX MỚI:\n👤 Khách: ${order.name}\n📦 Gói: ${order.pkg}\n🛠 NV: ${order.staff}\n⏰ Hẹn: ${order.time}\n💰 TỔNG: ${order.total}`;
             
-            // Chuyển Facebook
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "fixed"; // Tránh cuộn trang
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Hiệu ứng ăn mừng
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                alert("✅ Đã lưu đơn & Copy nội dung!\nẤn OK để chuyển sang Facebook dán tin nhắn.");
+            } catch (err) {
+                alert("Lỗi copy tự động. Vui lòng chụp màn hình!");
+            }
+            document.body.removeChild(textArea);
+
+            // D. CHUYỂN HƯỚNG FACEBOOK
+            closeModal();
             setTimeout(() => {
                 window.open("https://www.facebook.com/nguyen.duc.kien.30082", "_blank");
-                closeModal();
             }, 500);
         }
+
+        // --- 4. VẼ BẢNG THỐNG KÊ ---
+        function renderStats() {
+            const tbody = document.getElementById('statsBody');
+            if (orderHistory.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px; color:#bbb">Chưa có đơn hàng nào được lưu.</td></tr>';
+                return;
+            }
+
+            // Đảo ngược mảng để đơn mới nhất lên đầu
+            // Dùng map để tạo HTML string nhanh gọn
+            let html = orderHistory.slice().reverse().map(item => `
+                <tr>
+                    <td><b>${item.name}</b></td>
+                    <td>${item.pkg}</td>
+                    <td>${item.time}</td>
+                    <td style="color:#f1c40f; font-weight:bold">${item.total}</td>
+                    <td style="font-size:0.8rem; color:#bdc3c7">${item.timestamp}</td>
+                </tr>
+            `).join('');
+
+            tbody.innerHTML = html;
+        }
+
+        function clearHistory() {
+            if(confirm("Bạn có chắc muốn xóa toàn bộ lịch sử đơn hàng trên máy này?")) {
+                orderHistory = [];
+                localStorage.removeItem(STORAGE_KEY);
+                renderStats();
+            }
+        }
+
+        // CHẠY HÀM KHỞI TẠO
+        initApp();
+
     </script>
 </body>
 </html>
