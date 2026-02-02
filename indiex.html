@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAYGEX BOOKING</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* CSS GIAO DIỆN */
+        :root { --primary: #ff4757; --gold: #ffa502; --dark: #2f3542; --glass: rgba(255, 255, 255, 0.1); }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; color: white; background: #1e272e; padding-bottom: 80px; }
+        
+        /* HEADER */
+        header { text-align: center; margin-bottom: 30px; }
+        .logo { font-size: 2.5rem; font-weight: 900; color: #dfe4ea; text-transform: uppercase; margin: 0; }
+        .sub-logo { color: var(--gold); letter-spacing: 2px; font-size: 0.9rem; }
+
+        /* DANH SÁCH GÓI */
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; text-align: center; overflow: hidden; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card-name { padding: 15px; font-size: 1.5rem; font-weight: 900; background: rgba(255,255,255,0.05); }
+        .card-price { padding: 20px; font-size: 2.5rem; font-weight: 900; color: var(--gold); }
+        .btn-buy { padding: 10px 25px; margin-bottom: 20px; border-radius: 20px; border: none; font-weight: bold; cursor: pointer; background: white; color: #333; transition: 0.2s; }
+        .btn-buy:hover { background: var(--gold); color: white; }
+
+        /* BẢNG HÓA ĐƠN VỪA ĐẶT (Thay cho thống kê) */
+        .invoice-section { max-width: 1000px; margin: 40px auto; background: #2d3436; padding: 20px; border-radius: 15px; border: 1px dashed #7f8c8d; }
+        .invoice-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        .invoice-table th, .invoice-table td { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        
+        /* MODAL (Cửa sổ bật lên) */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; }
+        .modal-content { background: white; color: #333; width: 90%; max-width: 450px; border-radius: 20px; padding: 25px; position: relative; animation: zoomIn 0.3s; }
+        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        .btn-confirm { width: 100%; padding: 15px; background: #2f3542; color: white; border: none; border-radius: 8px; font-weight: 900; cursor: pointer; margin-top: 15px; font-size: 1.1rem; }
+        
+        /* Popup Copy Thủ Công (Dự phòng cho Google Sites) */
+        .manual-copy-box { display: none; margin-top: 15px; background: #fff3cd; padding: 10px; border-radius: 8px; border: 1px solid #ffeeba; }
+        textarea.copy-area { width: 100%; height: 80px; padding: 5px; font-size: 0.9rem; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="logo">DỊCH VỤ SAYGEX</h1>
+        <div class="sub-logo">PRO MAX EDITION</div>
+    </header>
+
+    <div class="grid-container">
+        <div class="card"><div class="card-name">BASIC</div><div class="card-price">199K</div><button class="btn-buy" onclick="openForm('BASIC', 199)">CHỌN</button></div>
+        <div class="card"><div class="card-name">VIP</div><div class="card-price">299K</div><button class="btn-buy" onclick="openForm('VIP', 299)">CHỌN</button></div>
+        <div class="card"><div class="card-name">PREMIUM</div><div class="card-price">399K</div><button class="btn-buy" onclick="openForm('PREMIUM', 399)">CHỌN</button></div>
+        <div class="card"><div class="card-name">ULTIMATE</div><div class="card-price">499K</div><button class="btn-buy" onclick="openForm('ULTIMATE', 499)">CHỌN</button></div>
+    </div>
+
+    <div class="invoice-section">
+        <h3 style="margin:0; color: var(--gold)">🧾 ĐƠN VỪA TẠO (Chờ gửi đi)</h3>
+        <p style="font-size: 0.8rem; font-style: italic; margin-top: 5px;">*Lưu ý: Đơn hàng sẽ biến mất khi tải lại trang. Hãy gửi ngay cho Admin!</p>
+        <table class="invoice-table">
+            <thead>
+                <tr style="color: #bdc3c7;"><th>Khách hàng</th><th>Gói</th><th>Tổng</th><th>Trạng thái</th></tr>
+            </thead>
+            <tbody id="invoiceBody">
+                <tr><td colspan="4" style="text-align:center; padding: 20px;">Chưa có đơn hàng nào...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <button onclick="closeModal()" style="position:absolute; top:10px; right:15px; border:none; background:none; font-size:24px; cursor:pointer">&times;</button>
+            
+            <div id="step1">
+                <h2 style="margin-top:0; text-align:center">ĐẶT GÓI <span id="pkgName" style="color:red"></span></h2>
+                <label>Tên của bạn:</label>
+                <input type="text" id="inpName" placeholder="Ví dụ: Nguyễn Văn A">
+                <label>Thời gian hẹn:</label>
+                <div style="display:flex; gap:10px">
+                    <input type="time" id="inpTime">
+                    <input type="date" id="inpDate">
+                </div>
+                <label>Chọn nhân viên:</label>
+                <select id="inpStaff">
+                    <option value="100">Đằng (+100k)</option>
+                    <option value="75">Khang (+75k)</option>
+                    <option value="50">Kiên (+50k)</option>
+                    <option value="0" selected>Tuấn (Free)</option>
+                </select>
+                <button class="btn-confirm" onclick="calcTotal()">XEM HÓA ĐƠN</button>
+            </div>
+
+            <div id="step2" style="display:none">
+                <h2 style="text-align:center; margin-top:0">XÁC NHẬN</h2>
+                <div id="billDetails" style="background:#f1f2f6; padding:15px; border-radius:10px; font-size:0.95rem;"></div>
+                
+                <div class="manual-copy-box" id="manualCopyBox">
+                    <span style="color:#d63031; font-weight:bold; font-size:0.8rem">⚠️ Google Sites chặn copy tự động. Hãy copy đoạn dưới đây:</span>
+                    <textarea class="copy-area" id="finalText" readonly></textarea>
+                </div>
+
+                <button class="btn-confirm" onclick="finishOrder()">✅ ĐÃ COPY -> GỬI FACEBOOK</button>
+                <button onclick="backToStep1()" style="width:100%; border:none; background:none; padding:10px; cursor:pointer; text-decoration:underline">Sửa lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let curPkg = "", curPrice = 0;
+        
+        function openForm(name, price) {
+            curPkg = name; curPrice = price;
+            document.getElementById('pkgName').innerText = name;
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('manualCopyBox').style.display = 'none';
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('bookingModal').style.display = 'none'; }
+        function backToStep1() { document.getElementById('step1').style.display = 'block'; document.getElementById('step2').style.display = 'none'; }
+
+        function calcTotal() {
+            const name = document.getElementById('inpName').value;
+            const date = document.getElementById('inpDate').value;
+            const time = document.getElementById('inpTime').value;
+            const staffOpt = document.getElementById('inpStaff');
+            const staffFee = parseInt(staffOpt.value);
+            const staffName = staffOpt.options[staffOpt.selectedIndex].text;
+
+            if(!name || !date || !time) { alert("Vui lòng điền đủ thông tin!"); return; }
+
+            let total = curPrice + staffFee;
+            let note = "";
+            if(new Date(date).getDay() === 6) { total *= 0.5; note = " (Đã giảm 50% T7)"; }
+
+            // Tạo nội dung tin nhắn
+            const msg = `📢 ĐƠN MỚI TỪ WEB:\n- Khách: ${name}\n- Gói: ${curPkg}\n- NV: ${staffName}\n- Hẹn: ${time} ngày ${date}\n- Tổng: ${total}K${note}`;
+
+            // Hiển thị hóa đơn
+            document.getElementById('billDetails').innerHTML = `
+                <b>${name}</b><br>Gói: ${curPkg} - NV: ${staffName}<br>
+                Thời gian: ${time} ${date}<br>
+                <b style="color:red; font-size:1.2rem">TỔNG: ${total}K</b>${note}
+            `;
+            
+            // Chuẩn bị text để copy
+            document.getElementById('finalText').value = msg;
+            
+            // Thử copy tự động
+            navigator.clipboard.writeText(msg).then(() => {
+                alert("Đã copy nội dung! Ấn nút để qua Facebook.");
+            }).catch(() => {
+                // Nếu Google Sites chặn, hiện hộp thủ công
+                document.getElementById('manualCopyBox').style.display = 'block';
+                document.getElementById('finalText').select();
+            });
+
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            
+            // Lưu dữ liệu tạm để hiển thị bên ngoài (sẽ mất khi reload)
+            window.tempOrder = { name, pkg: curPkg, total: total + "K" };
+        }
+
+        function finishOrder() {
+            // Thêm vào bảng "Đơn vừa tạo"
+            const tbody = document.getElementById('invoiceBody');
+            if(tbody.innerHTML.includes("Chưa có")) tbody.innerHTML = "";
+            
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${window.tempOrder.name}</td><td>${window.tempOrder.pkg}</td><td>${window.tempOrder.total}</td><td style="color:#2ecc71">Đang gửi...</td>`;
+            tbody.prepend(tr);
+
+            // Hiệu ứng
+            confetti({ particleCount: 150, spread: 70 });
+            
+            // Chuyển Facebook
+            setTimeout(() => {
+                window.open("https://www.facebook.com/nguyen.duc.kien.30082", "_blank");
+                closeModal();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
